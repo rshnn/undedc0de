@@ -21,10 +21,23 @@ void segment_fault_handler(int signum)
 	//Increment pointer down to the stored PC
 	//Increment value at pointer by length of bad instruction
 
+	/* Signum is used to construct a pointer to the stack frame of seg_fault_handler */
 	ptr = (void *) &signum;
-	printf("%i\n",signum);
-	printf("%x\n",ptr);
-	
+	printf("ptr signum addr %x\n",ptr);
+
+
+	/* Increment ptr to the address that stores the return address */
+	ptr += 0x4c-0x10;
+	printf("ptr rtrn address %x\n",ptr);
+	printf("rtn addr %x\n",*(int*)ptr);
+
+	/* Move address stored in ptr by 0x6 (length of seg fault instruction) */
+	*(int *)ptr += 0x6;
+	printf("ptr at end %x\n",ptr);
+	printf("rtn addr %x\n",*(int*)ptr);
+
+
+	/* Now, when seg_fault_handler compelets, the PC will move to the print statement. */
 }
 
 
