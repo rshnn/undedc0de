@@ -8,7 +8,7 @@ Dereferencing the address where the return address is located gives us the addre
 
 For the code to run to completion, the dereference instruction needs to be skipped.  Assessing the program run in gdb one assembly instruction at a time, one can determine that the length of the instruction of the dereference is 0x6 memory addresses long.  Therefore, the return address will be incremented from the callee function by 0x6. 
 
-0xffffc7b0:     0x0000000b      (SIGNUM=11)
+0xffffc7b0:     0x0000000b      (SIGNUM=11)  
 0xffffc7ec:     0x08048492      (RETURN ADDRESS)
 
 | Value of ptr  |  contents of address |
