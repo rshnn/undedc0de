@@ -5,7 +5,7 @@
 // Postconditions: Generates Segmentation Fault for
 //                               signal handler self-hack
 
-// Student name:		Roshan Patel rrp78
+// Student name:		Roshan Patel (rrp78)
 // Ilab machine used:	kill.cs.rutgers.edu
 
 #include <signal.h>

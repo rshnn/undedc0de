@@ -2,7 +2,7 @@
 ### undead_code 
 
 The purpose of this exercise is to study a signal handler and the callee stack frame.   
-The callee stack frame (signal handler in this case) will contain parametric variables (signum).  Obtaining the address of this variable will give us a pointer to the callee stack frame.  The pointer is located at `0xffffc7b0`.  The callee stack frame also contains the return address.  This is stored a set number of instructions away from the location of signum (`0xffffc7b0`).  
+The callee stack frame (signal handler in this case) will contain a parametric variable (signum).  Obtaining the address of this variable will give us a pointer to the callee stack frame.  The pointer is located at `0xffffc7b0`.  The callee stack frame also contains the return address.  This is stored a set number of instructions away from the location of signum (`0xffffc7b0`).  
 
 Dereferencing the address where the return address is located gives us the address of the line that caused the segmentation fault (`r2=*(int*)0`).  THis address is `0x08048492`.  
 
@@ -17,10 +17,10 @@ For the code to run to completion, the dereference instruction needs to be skipp
 | 0x8048498 <main+48> |    0x3c2404c7  |
 
 
-### dev-notes
+#### misc-dev-notes
 
 + 32-bit compiler 
-    * `rshn@optimusprime:~/Developer/school/undedc0de$ sudo apt-get install lib32gcc-4.8-dev`
+    * `rshn@optimusprime:~/Developer/school/undedc0de$ sudo apt-get install lib32gcc-4.8-dev`  
     + `rshn@optimusprime:~/Developer/school/undedc0de$ sudo apt-get install libc6-dev:i386`
 
 + makefile created
@@ -37,7 +37,7 @@ For the code to run to completion, the dereference instruction needs to be skipp
 
 + The assembly file outputs are exactly the same between the ilab -S compile and mutalisk -S compile 
     * 1 diff
-        -   .ident  "GCC: (GNU) 4.8.5 20150623 (Red Hat 4.8.5-4)"
+        -   .ident  "GCC: (GNU) 4.8.5 20150623 (Red Hat 4.8.5-4)"  
         -   .ident  "GCC: (Ubuntu 4.8.5-4ubuntu2) 4.8.5"
     * All else is same
     * Compiling with debugger flag (-g) will add some .nonsense stuff to the assembly 
@@ -60,12 +60,9 @@ gdb -tui undead_code
 layout asm
 break (linenumber)
 run
-nexti
+nexti (ni)
+info registers (i r)
 ```
 
 [checking memory from gdb](http://www.delorie.com/gnu/docs/gdb/gdb_56.html)
 [background on x86](http://www.cs.virginia.edu/~evans/cs216/guides/x86.html)
-
-
-
-+ The return address is stored in the stack frame of 
